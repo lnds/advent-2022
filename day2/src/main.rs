@@ -85,5 +85,4 @@ fn main() {
     }
     println!("total = {}", total);
     println!("total2 = {}", total2);
-
 }
