@@ -1,6 +1,5 @@
 use std::io::{self, BufRead};
 
-
 fn defeats(o: &str, p: &str) -> bool {
     match o {
         "A" => p == "Z",
@@ -9,16 +8,16 @@ fn defeats(o: &str, p: &str) -> bool {
         "X" => p == "C",
         "Y" => p == "A",
         "Z" => p == "B",
-        _ => false
+        _ => false,
     }
 }
 
 fn base_score(p: &str) -> i32 {
     match p {
-    "X" => 1,
-    "Y" => 2,
-    "Z" => 3,
-    _ => 0
+        "X" => 1,
+        "Y" => 2,
+        "Z" => 3,
+        _ => 0,
     }
 }
 
@@ -27,7 +26,7 @@ fn find_lose(o: &str) -> &str {
         "A" => "Z",
         "B" => "X",
         "C" => "Y",
-        _ =>""
+        _ => "",
     }
 }
 
@@ -36,7 +35,7 @@ fn find_win(o: &str) -> &str {
         "A" => "Y",
         "B" => "Z",
         "C" => "X",
-        _ => ""
+        _ => "",
     }
 }
 
@@ -45,10 +44,9 @@ fn find_draw(o: &str) -> &str {
         "A" => "X",
         "B" => "Y",
         "C" => "Z",
-        _ => ""
+        _ => "",
     }
 }
-
 
 fn score(o: &str, p: &str) -> i32 {
     if defeats(o, p) {
@@ -65,22 +63,22 @@ fn score2(o: &str, p: &str) -> i32 {
         "X" => base_score(find_lose(o)),
         "Y" => base_score(find_draw(o)) + 3,
         "Z" => base_score(find_win(o)) + 6,
-        _ => 0
+        _ => 0,
     }
 }
 
 fn main() {
-    let mut lines = io::stdin().lock().lines();
+    let lines = io::stdin().lock().lines();
     let mut total = 0;
     let mut total2 = 0;
-    while let Some(line) = lines.next() {
+    for line in lines {
         match line {
             Ok(line) => {
-               let v: Vec<&str> = line.split(' ').collect();
+                let v: Vec<&str> = line.split(' ').collect();
                 total += score(v[0], v[1]);
                 total2 += score2(v[0], v[1])
             }
-            _ => println!("error reading line")
+            _ => println!("error reading line"),
         }
     }
     println!("total = {}", total);
